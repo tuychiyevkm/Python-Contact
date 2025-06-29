@@ -1,4 +1,4 @@
-from printer import print_status, print_all_contact
+from printer import print_status, print_all_contact, print_contact
 
 def add_contact(contacts: list[dict]):
     first_name = input("first name: ")
@@ -22,12 +22,42 @@ def show_all_contact(contacts: list[dict]):
     else:
         print_status('error')
 
-def search_contact():
-    pass
 
-def delete_contact():
-    pass
+def search_contact(contacts):
+    keyword = input("Ism yoki familiya kiriting: ").lower()
+    found = False
 
-def update_contact():
-    pass
+    for c in contacts:
+        if keyword in c["first_name"].lower() or keyword in c["last_name"].lower():
+            print_contact(c)
+            found = True
 
+    if not found:
+        print_status("error")
+
+
+def delete_contact(contacts):
+    phone = input("Telefon raqam kiriting (o‘chirish uchun): ")
+
+    for c in contacts:
+        if c["phone"] == phone:
+            contacts.remove(c)
+            print_status("success")
+            return
+
+    print_status("error")
+
+
+def update_contact(contacts):
+    phone = input("Qaysi kontaktni yangilaymiz (telefon raqam): ")
+
+    for c in contacts:
+        if c["phone"] == phone:
+            c["first_name"] = input("Yangi ism: ")
+            c["last_name"] = input("Yangi familiya: ")
+            c["phone"] = input("Yangi telefon: ")
+            c["group"] = input("Yangi guruh: ")
+            print_status("success")
+            return
+
+    print_status("error")
