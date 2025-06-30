@@ -13,9 +13,9 @@ def main():
 
         choice = input("Menu tanlang: ")
 
-        if choice == '1':
+        if choice == "1":
             add_contact(contacts)
-        elif choice == '2':
+        elif choice == "2":
             show_all_contact(contacts)
         elif choice == "3":
             search_contact(contacts)
